@@ -35,4 +35,44 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
     }
+
+    /**
+     * A list of items in this order
+     *
+     * @return ItemBag|null A bag containing items in this order
+     */
+    public function getItems()
+    {
+      return $this->getParameter('items');
+    }
+
+    /**
+     * Set the items in this order
+     *
+     * @param ItemBag|array $items An array of items in this order
+     */
+    public function setItems($items)
+    {
+      if ($items && !$items instanceof ItemBag) {
+        $items = new ItemBag($items);
+      }
+
+      return $this->setParameter('items', $items);
+    }
+
+    protected function getItemData()
+    {
+      $data = array();
+      $items = $this->getItems();
+      if ($items) {
+        foreach ($items as $n => $item) {
+          $data["li_id$n"] = $n;
+          $data["li_description$n"] = $item->getDescription();
+          $data["li_quantity$n"] = $item->getQuantity();
+          $data["li_price$n"] = $this->formatCurrency($item->getPrice());
+        }
+      }
+
+      return $data;
+    }
 }

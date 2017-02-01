@@ -18,6 +18,8 @@ class PurchaseRequest extends AbstractRequest
         $data['amount'] = $this->getAmount();
         $data['order_no'] = $this->getTransactionId();
 
+        $data = array_merge($data, $this->getItemData());
+
         return $data;
     }
 
