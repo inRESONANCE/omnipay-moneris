@@ -18,6 +18,19 @@ class PurchaseRequest extends AbstractRequest
         $data['amount'] = $this->getAmount();
         $data['order_no'] = $this->getTransactionId();
 
+        $card = $this->getCard();
+        if ($card) {
+          $data['od_bill_firstname'] = $card->getFirstName();
+          $data['od_bill_lastname'] = $card->getLastName();
+          $data['od_bill_address'] = $card->getAddress1() . ' ' . $card->getAddress2();
+          $data['od_bill_city'] = $card->getCity();
+          $data['od_bill_state'] = $card->getState();
+          $data['od_bill_country'] = $card->getCountry();
+          $data['od_bill_zipcode'] = $card->getPostcode();
+          $data['od_bill_phone'] = $card->getPhone();
+          $data['client_email'] = $card->getEmail();
+        }
+
         $data = array_merge($data, $this->getItemData());
 
         return $data;
