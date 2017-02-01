@@ -28,6 +28,16 @@ class PurchaseRequest extends AbstractRequest
           $data['od_bill_country'] = $card->getCountry();
           $data['od_bill_zipcode'] = $card->getPostcode();
           $data['od_bill_phone'] = $card->getPhone();
+
+          $data['od_ship_firstname'] = $card->getShippingFirstName();
+          $data['od_ship_lastname'] = $card->getShippingLastName();
+          $data['od_ship_address'] = $card->getShippingAddress1() . ' ' . $card->getShippingAddress2();
+          $data['od_ship_city'] = $card->getShippingCity();
+          $data['od_ship_state'] = $card->getShippingState();
+          $data['od_ship_country'] = $card->getShippingCountry();
+          $data['od_ship_zipcode'] = $card->getShippingPostcode();
+          $data['od_ship_phone'] = $card->getShippingPhone();
+
           $data['client_email'] = $card->getEmail();
         }
 

@@ -2,6 +2,16 @@
 
 namespace Omnipay\Moneris\Message;
 
+use Guzzle\Http\ClientInterface;
+use Omnipay\Common\CreditCard;
+use Omnipay\Common\Currency;
+use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Common\Exception\RuntimeException;
+use Omnipay\Common\Helper;
+use Omnipay\Common\ItemBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
+
 /**
  * Moneris Abstract Request
  */
